@@ -1,8 +1,9 @@
 
 ### Linux ###
 *~
-# VENDOR PHP AND OTHERS git 
+# VENDOR PHP AND MYSQL Accounts 
 vendor/
+db.php
 
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
