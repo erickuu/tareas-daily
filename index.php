@@ -1,4 +1,10 @@
-<?php include("db.php")?>
+<?php include('vendor/autoload.php');?>
+<?php 
+    use App\connectDb;
+    use App\deleteTask;
+    use App\saveTask;
+    use App\editTask;
+?>
 <?php include("includes/header.php")?>
 
     <div class="container p-4">
@@ -13,7 +19,7 @@
                     </div>
                     <?php session_unset();}?>
                 <div class="card card-body">
-                    <form action="save_task.php" method="POST"> 
+                    <form action="src/saveTask.php" method="POST"> 
                         <div class="form-group">
                             <input type="text" name="title" class="mt-3 form-control" placeholder="Escribe tu tarea" autofocus>
                         </div>
@@ -37,6 +43,8 @@
                     </thead>
                     <tbody>
                             <?php
+                            $instanceOfConnetDb = new connectDb;
+                            $conn = $instanceOfConnetDb->connects();
                             $query = "SELECT * FROM task";
                             $resultSql = mysqli_query($conn, $query);
                             
@@ -47,19 +55,17 @@
                                 <td><?php echo $getRow['description']?></td>
                                 <td><?php echo $getRow['create_at']?></td>
                                 <td>
-                                    <a class="icons btn btn-danger" style="color:brownie;" href="delete_task.php?id=<?php print($getRow['id']); ?>">
+                                    <a class="icons btn btn-danger" style="color:brownie;" href="src/deleteTask.php?id=<?php print($getRow['id']); ?>">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                     <span></span>   
-                                    <a class="icons btn btn-warning" style="color:white;" href="edit.php?id=<?php print($getRow['id']); ?>">
+                                    <a class="icons btn btn-warning" style="color:white;" href="src/editTask.php?id=<?php print($getRow['id']); ?>">
                                         <i class="fas fa-marker"></i>
                                     </a>
                                 </td>
                             </tr>
                             <?php } ?>
-        
-                            
-                        
+                             
                     </tbody>
 
                 </table>
